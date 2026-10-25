@@ -1318,6 +1318,9 @@ body::before{background:none;}
 @media(prefers-reduced-motion:reduce){#sec-agenda .day-tab-btn{transition:none}#sec-agenda .day-schedule-container{animation:none}}
 </style>
 
+<style>
+#coverGate .guest-name-display{display:block;flex-shrink:0;width:100%;min-width:0;max-width:390px;margin:0 auto 20px;padding:8px 10px 12px;border:0;color:#fff0c5;font-family:Battambang,Kantumruy Pro,sans-serif;font-size:clamp(18px,5vw,23px);font-weight:700;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;text-wrap:balance;text-align:center}
+</style>
 </head>
 <body>
 
@@ -1342,6 +1345,7 @@ body::before{background:none;}
 <div class="portrait-crest"><img src="assets/monogram_crest.png" width="652" height="532" alt="ក្បាច់អក្សរកាត់ ធ និង ស"></div>
 <h1 class="portrait-title">សិរីមង្គលអាពាហ៍ពិពាហ៍</h1>
 <p class="portrait-invite">សូមគោរពអញ្ជើញ</p>
+<p class="guest-name-display" id="guestNameText" aria-live="polite">ភ្ញៀវកិត្តិយស</p>
 <button type="button" class="reference-open" onclick="openWedgoInvitation()">បើកធៀបអញ្ជើញ <span aria-hidden="true">→</span></button>
 <div class="portrait-event"><p class="portrait-date">ថ្ងៃសៅរ៍ ទី២១ ខែវិច្ឆិកា ឆ្នាំ២០២៦</p><p>វេលាម៉ោង ១១:៤៥ ថ្ងៃត្រង់</p></div>
 <div class="portrait-divider" aria-hidden="true">❧</div>
@@ -1611,10 +1615,10 @@ body::before{background:none;}
     <script>
         // ១. ចាប់យកឈ្មោះភ្ញៀវពី URL Parameter (ប្រសិនបើមានធាតុឈ្មោះភ្ញៀវ)
         const urlParams = new URLSearchParams(window.location.search);
-        const guestParam = urlParams.get('to') || urlParams.get('guest');
+        const guestParam = [urlParams.get('to'), urlParams.get('guest')].find(value => value && value.trim());
         const guestEl = document.getElementById('guestNameText');
-        if (guestParam && guestEl) {
-            guestEl.textContent = guestParam;
+        if (guestEl) {
+            guestEl.textContent = guestParam || 'ភ្ញៀវកិត្តិយស';
         }
 
         // ២. បើកធៀបការ និងចាក់ភ្លេង
